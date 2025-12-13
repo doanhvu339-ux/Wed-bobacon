@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Web chính</title>
+<meta charset="UTF-8">
+<title>Web chính</title>
 </head>
 <body>
-    <h2>WEB CHÍNH</h2>
 
-    <input type="text" id="msg" placeholder="Nhập nội dung">
-    <button onclick="send()">Gửi</button>
+<h2>WEB CHÍNH (NGƯỜI GỬI)</h2>
+<input id="msg" placeholder="Nhập nội dung">
+<button onclick="send()">Gửi</button>
 
-    <script>
-        function send() {
-            const text = document.getElementById("msg").value;
-            if (!text) {
-                alert("Chưa nhập nội dung!");
-                return;
-            }
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
-            // Mã hóa để không lỗi ký tự
-            const encoded = encodeURIComponent(text);
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBZYXFNDGRNXG3mQ6q175CyvzKyJUYhUDw",
+  authDomain: "bobacn-fcc2c.firebaseapp.com",
+  databaseURL: "https://bobacn-fcc2c-default-rtdb.firebaseio.com/",
+  projectId: "bobacn-fcc2c"
+};
 
-            // Chuyển sang web phụ
-            window.location.href = "viewer.html?msg=" + encoded;
-        }
-    </script>
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+function send(){
+  var text = document.getElementById("msg").value;
+  if(text==="") return alert("Chưa nhập nội dung");
+  db.ref("noidung").set(text);
+}
+</script>
+
 </body>
 </html>
