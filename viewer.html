@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Web phụ</title>
+<meta charset="UTF-8">
+<title>Web phụ</title>
 </head>
 <body>
-    <h2>WEB PHỤ</h2>
-    <div id="output"></div>
 
-    <script>
-        const params = new URLSearchParams(window.location.search);
-        const msg = params.get("msg");
+<h2>WEB PHỤ (NGƯỜI NHẬN)</h2>
+<div id="view">Đang chờ dữ liệu...</div>
 
-        if (msg) {
-            document.getElementById("output").innerText =
-                decodeURIComponent(msg);
-        } else {
-            document.getElementById("output").innerText =
-                "Không có dữ liệu được gửi!";
-        }
-    </script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBZYXFNDGRNXG3mQ6q175CyvzKyJUYhUDw",
+  authDomain: "http://bobacn-fcc2c.firebaseapp.com",
+  databaseURL: "https://bobacn-fcc2c-default-rtdb.firebaseio.com/",
+  projectId: "bobacn-fcc2c"
+};
+
+firebase.initializeApp(firebaseConfig);
+var db = firebase.database();
+
+db.ref("noidung").on("value", function(snapshot){
+  document.getElementById("view").innerText = snapshot.val();
+});
+</script>
+
 </body>
 </html>
