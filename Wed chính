@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Web chính</title>
+</head>
+<body>
+    <h2>WEB CHÍNH</h2>
+
+    <input type="text" id="msg" placeholder="Nhập nội dung">
+    <button onclick="send()">Gửi</button>
+
+    <script>
+        function send() {
+            const text = document.getElementById("msg").value;
+            if (!text) {
+                alert("Chưa nhập nội dung!");
+                return;
+            }
+
+            // Mã hóa để không lỗi ký tự
+            const encoded = encodeURIComponent(text);
+
+            // Chuyển sang web phụ
+            window.location.href = "viewer.html?msg=" + encoded;
+        }
+    </script>
+</body>
+</html>
